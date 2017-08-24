@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# CYJ = 수업시간에 음식사진만 봄
 
 from imagebtn import *
 from tkinter import *
