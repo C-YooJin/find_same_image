@@ -67,7 +67,7 @@ class Conveyor(Frame):
                 self.cur_idx += 1
                 self.conveyor_canvas.delete(self.cur)
                 self.conveyor_canvas2.delete(self.cur2)
-                self.cur2 = self.conveyor_canvas2.create_polygon([(0, 5), (30, 5), (15, 25)], fill='yellow', width=1, outline="black")
+                self.cur2 = self.conveyor_canvas2.create_polygon([(10, 5), (40, 5), (25, 25)], fill='yellow', width=1, outline="black")
             # 그 외 도형 이동
             else:
                 self.cur_idx += 1
