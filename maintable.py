@@ -57,6 +57,3 @@ class Maintable(Frame):
             self.master.conveyor.correct_match()
         else:
             self.master.conveyor.wrong_match()
-
-        
-        
