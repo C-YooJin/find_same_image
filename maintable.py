@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-# CYJ = 수업시간에 음식사진만 봄
 
 from imagebtn import *
 from tkinter import *
-from random import *
+import random
 import time
 
 
 class Maintable(Frame):
     n=0
     selected_image=0
-    
+
     def __init__(self, master, picture, alphabet, width):
         super(Maintable, self).__init__()
         self.image_number_list = []  # 셔플된 이미지의 번호를 저장하기 위한 리스트. 16개
@@ -25,17 +24,26 @@ class Maintable(Frame):
         # TODO
         # ImageButton widget 생성하고 각 widget에 숨겨진 이미지 추가
         # 이미지 클릭시 이벤트 bind
-        for i in range(0,self.width):
-            for j in range(0,self.width):
-                pass
+        for i in range(0, self.width):
+            for j in range(0, self.width):
+                button = ImageButton(self, borderwidth=5)
+                button.config(image=alphabet[i*4+j])
 
+                # ----------------------------- test code ----------------------------- #
+                # button.config(image=self.picture[self.image_number_list[i * 4 + j]])
+                # ----------------------------- test code ----------------------------- #
 
+                button.add_hidden(alphabet=alphabet[i*4+j], hidden=self.picture[self.image_number_list[i*4+j]])
+                button.grid(row=i, column=j)
+                button.bind('<ButtonPress-1>', self.show_hidden)
+                button.bind('<ButtonRelease-1>', self.hide_picture)
 
     # TODO
     # hidden 이미지 셔플링
     def random_shuffle(self):
-        pass
+        self.image_number_list = random.sample(range(16), 16)
     # 선택된 알파벳 ImageButton의 숨겨진 이미지 출력
+
     def show_hidden(self, event):
         event.widget.config(image=event.widget.get_hidden())
 
@@ -43,9 +51,12 @@ class Maintable(Frame):
     # 숨겨진 이미지 숨기고 알파벳 이미지로 변환
     # 선택된 이미지와 컨베이어의 현재 이미지와 비교하고, 비교 결과에 따른 명령어 실행 부분
     def hide_picture(self, event):
-        #time.sleep(10)
-        #time.sleep(1.5)
         selected_image = self.picture.index(event.widget.hidden)
+        event.widget.config(image=event.widget.alphabet)
+        if(selected_image == self.master.conveyor.image_number_list[self.master.conveyor.cur_idx]):
+            self.master.conveyor.correct_match()
+        else:
+            self.master.conveyor.wrong_match()
 
         
         
